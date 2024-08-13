@@ -2,34 +2,17 @@
 /*************************************************************************************
  * html5.php
  * ---------------
- * Author: Nigel McNie (nigel@geshi.org)
- * Copyright: (c) 2004 Nigel McNie (http://qbnz.com/highlighter/),  Zéfling (zefling@ikilote.net)
+ * Author: Zefling (zefling@ikilote.net)
+ * Copyright: (c) 2024 Zefling (http://ikilote.net/)
  * Release Version: 1.0.9.1
- * Date Started: 2004/07/10
+ * Date Started: 2024/08/13
  *
- * HTML 5 language file for GeSHi.
+ * HTML 5 fot Angular language file for GeSHi.
  *
  * CHANGES
  * -------
-  * 2024/08/13 (1.0.9.1)
- *  -  Add more keywords
- * 2005/12/28 (1.0.4)
- *   -  Removed escape character for strings
- * 2004/11/27 (1.0.3)
- *   -  Added support for multiple object splitters
- * 2004/10/27 (1.0.2)
- *   -  Added support for URLs
- * 2004/08/05 (1.0.1)
- *   -  Added INS and DEL
- *   -  Removed the background colour from tags' styles
- * 2004/07/14 (1.0.0)
+ * 2024/08/13 (1.0.0)
  *   -  First Release
- *
- * TODO (updated 2004/11/27)
- * -------------------------
- * * Check that only HTML4 strict attributes are highlighted
- * * Eliminate empty tags that aren't allowed in HTML4 strict
- * * Split to several files - html4trans, xhtml1 etc
  *
  *************************************************************************************
  *
@@ -79,8 +62,16 @@ $language_data = array (
             'u', 'ul',
             'var', 'video',
             'wbr',
-            ),
+            // angular tag
+            'ng-container', 'ng-template', 'ng-content'
+        ),
         3 => array(
+            'for', 'if', 'else if', 'else', 'switch', 'case', 'default', 'let'
+        ),
+        4 => array(
+            'let', 'of'
+        ),
+        5 => array(
             'abbr', 'accept-charset', 'accept', 'accesskey', 'action', 'align', 'alink', 'alt', 'archive', 'axis', 'autocomplete', 'autofocus',
             'background', 'bgcolor', 'border',
             'cellpadding', 'cellspacing', 'char', 'charoff', 'charset', 'checked', 'cite', 'class', 'classid', 'clear', 'code', 'codebase', 'codetype', 'color', 'cols', 'colspan', 'compact', 'content', 'coords', 'contenteditable', 'contextmenu',
@@ -98,17 +89,22 @@ $language_data = array (
         ),
     ),
     'SYMBOLS' => array(
-        '/', '='
+        0 => array('/', '=', ),
+        1 => array('*', '{', '}', ';', ':', '(', ')', '[', ']', '$', '@')
         ),
     'CASE_SENSITIVE' => array(
         GESHI_COMMENTS => false,
         2 => false,
         3 => false,
+        4 => false,
+        5 => false,
         ),
     'STYLES' => array(
         'KEYWORDS' => array(
             2 => 'color: #000000; font-weight: bold;',
-            3 => 'color: #000066;',
+            3 => 'color: #CC66CC;',
+            4 => 'color: #CC66CC;',
+            5 => 'color: #000066;',
             ),
         'COMMENTS' => array(
             ),
@@ -127,7 +123,8 @@ $language_data = array (
         'METHODS' => array(
             ),
         'SYMBOLS' => array(
-            0 => 'color: #66cc66;'
+            0 => 'color: #66cc66;',
+            1 => 'color: #CC66CC; font-weight: bold;'
             ),
         'SCRIPT' => array(
             -2 => 'color: #404040;', // CDATA
@@ -163,8 +160,15 @@ $language_data = array (
             '&' => ';'
             ),
         2 => array(
+            '(' => ')'
+            ),
+        3 => array(
+            '{' => '}'
+        ),
+        4 => array(
             '<' => '>'
-            )
+        )
+
     ),
     'HIGHLIGHT_STRICT_BLOCK' => array(
         -2 => false,
@@ -179,6 +183,9 @@ $language_data = array (
             2 => array(
                 'DISALLOWED_BEFORE' => '(?<=&lt;|&lt;\/)',
                 'DISALLOWED_AFTER' => '(?=\s|\/|&gt;)',
+            ),
+            4 => array(
+                'DISALLOWED_BEFORE' => '@',
             )
         )
     )
